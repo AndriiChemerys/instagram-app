@@ -1,20 +1,23 @@
 import React from "react";
 import "./Post.css";
+import Avatar from "@mui/material/Avatar";
 
-function Post() {
+function Post({ username, caption, imageUrl, imageAvatar }) {
   return (
     <div className="post">
-      <h3>Username</h3>
+      <div className="post__header">
+        <Avatar className="post__avatar" alt="RafehQazi" src={imageAvatar} />
+        <h3>{username}</h3>
+      </div>
 
       {/* header -> avatar + username */}
 
-      <img
-        className="post__image"
-        src="https://upload.wikimedia.org/wikipedia/commons/1/1a/24701-nature-natural-beauty.jpg"
-        alt=""
-      />
+      <img className="post__image" src={imageUrl} alt="" />
       {/* image */}
-      <h4>Username: caption</h4>
+      <h4 className="post__text">
+        <strong>{username}</strong>
+        {caption}
+      </h4>
       {/* username + caption */}
     </div>
   );
