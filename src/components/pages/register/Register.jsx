@@ -7,8 +7,6 @@ import Button from 'components/elements/button/Button';
 
 import { registerUser } from 'services/firebase';
 
-import styles from './style.module.css';
-
 function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -40,7 +38,7 @@ function Register() {
 
   return (
     <Main>
-      <form className={styles.registerForm} onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <InputGroup
           id="email"
           type="text"
