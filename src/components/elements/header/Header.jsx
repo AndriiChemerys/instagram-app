@@ -1,10 +1,27 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth, signOutUser } from 'services/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 import Button from '../button/Button';
 
 import styles from './style.module.css';
 
 function Header() {
+  const [currentUser, setCurrentUser] = useState(null);
+  const navigate = useNavigate();
+
+  onAuthStateChanged(auth, (user) => {
+    setCurrentUser(user);
+  });
+
+  console.log(currentUser);
+
+  const signOut = () => {
+    signOutUser().then(() => {
+      navigate('/');
+    });
+  };
+
   return (
     <header className={styles.header}>
       <div className={`container ${styles.headerContainer}`}>
@@ -12,17 +29,25 @@ function Header() {
           <h1 className={styles.title}>Instagram App</h1>
         </Link>
         <nav className={styles.navigation}>
-          <ul className={styles.navigationList}>
-            <li>
-              <Link to="/register">
-                <Button>Sign in</Button>
-              </Link>
-            </li>
-            <li>
-              <Link to="/register">
-                <Button>Sign up</Button>
-              </Link>
-            </li>
+          <ul>
+            {currentUser ? (
+              <li>
+                <Button onClick={signOut}>Sign out</Button>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <Link to="/login">
+                    <Button>Sign in</Button>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/register">
+                    <Button>Sign up</Button>
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       </div>
