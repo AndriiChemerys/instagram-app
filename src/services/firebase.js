@@ -13,6 +13,13 @@ import {
   signOut,
 } from 'firebase/auth';
 
+import {
+  getDownloadURL,
+  getStorage,
+  ref as storageRef,
+  uploadBytes,
+} from 'firebase/storage';
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -57,3 +64,15 @@ export const loginUser = (email, password) =>
   signInWithEmailAndPassword(auth, email, password);
 
 export const signOutUser = () => signOut(auth);
+
+export const storage = getStorage();
+
+export const addFileToStorage = (file) => {
+  console.log(file);
+
+  const fileDestination = storageRef(storage, `files/${file.name}`);
+
+  return uploadBytes(fileDestination, file).then(() =>
+    getDownloadURL(fileDestination)
+  );
+};
