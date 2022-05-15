@@ -55,7 +55,6 @@ function Register() {
             handleChange={handlePasswordChange}
             inputValue={password}
           />
-          <InputGroup id="file" type="file" label />
           <Button btnType="submit">Sign up</Button>
           {apiError && <p>{apiError}</p>}
         </form>
