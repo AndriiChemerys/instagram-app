@@ -12,7 +12,6 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-
 import {
   getDownloadURL,
   getStorage,
@@ -65,11 +64,9 @@ export const loginUser = (email, password) =>
 
 export const signOutUser = () => signOut(auth);
 
-export const storage = getStorage();
+const storage = getStorage();
 
 export const addFileToStorage = (file) => {
-  console.log(file);
-
   const fileDestination = storageRef(storage, `files/${file.name}`);
 
   return uploadBytes(fileDestination, file).then(() =>

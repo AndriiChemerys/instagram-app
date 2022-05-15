@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Main from 'components/layouts/main/Main';
 import InputGroup from 'components/elements/input-group/InputGroup';
@@ -7,7 +7,6 @@ import Button from 'components/elements/button/Button';
 import { addFileToStorage, save } from 'services/firebase';
 
 import { RestrictedRoute } from 'utils/AuthorizationRoutes';
-
 import { MainContext } from 'contexts/main';
 
 function AddPost() {
@@ -29,6 +28,7 @@ function AddPost() {
           title,
           description,
           image: url,
+          likes: 0,
           author: {
             name: currentUser.displayName,
             avatar: currentUser.photoURL,
